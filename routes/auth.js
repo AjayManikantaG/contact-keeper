@@ -49,7 +49,6 @@ router.post(
         });
 
       // If user exists, compare the passwords...
-      console.log(user);
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
         return res.status(404).json({
