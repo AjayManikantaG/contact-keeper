@@ -27,9 +27,11 @@ router.post(
   '/',
   [
     authMiddleware,
-    body('name', 'Please add a name').not().isEmpty(),
-    body('email', 'Please enter valid email').isEmail(),
-    body('phone', 'Please enter valid 10 digit phone number').isLength(10),
+    [
+      body('name', 'Please add a name').not().isEmpty(),
+      body('email', 'Please enter valid email').isEmail(),
+      body('phone', 'Please enter valid 10 digit phone number').isLength(10),
+    ],
   ],
   async (req, res) => {
     // Validate the request body
@@ -37,15 +39,16 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json(errors);
     }
+    const user = req.user.id;
+    const { name, email, phone, type } = req.body;
 
     try {
-      const user = req.user.id;
-      const { name, email, phone, type } = req.body;
       const contact = { user, name, email, phone };
       console.log(type);
       if (type !== undefined) contact.type = type;
 
-      const isInserted = await Contact.insertMany(contact);
+      const newContact = new Contact(contact);
+      const isInserted = await newContact.save();
       console.log(isInserted);
       res.status(200).send('Record inserted sucessfully...');
     } catch (err) {
@@ -57,8 +60,42 @@ router.post(
 // @route     PUT api/contacts
 // @desc      Update existing contact
 // @access    Private
-router.put('/:id', (req, res) => {
-  res.send('update contact..');
+router.put('/:id', [authMiddleware], async (req, res) => {
+  const { name, phone, email, type } = req.body;
+
+  // Build contact object
+  const contactFields = {};
+  if (name) contactFields.name = name;
+  if (phone) contactFields.phone = phone;
+  if (email) contactFields.email = email;
+  if (type) contactFields.type = type;
+
+  try {
+    let contact = await Contact.findById(req.params.id);
+    if (!contact)
+      return res
+        .status(404)
+        .json({ statusCode: 404, msg: 'Contact not found...' });
+
+    // Make sure user owns contact
+    if (contact.user.toString() !== req.user.id)
+      return res.status(401).json({ statusCode: 401, msg: 'Not authorized' });
+
+    contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: contactFields,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      statusCode: 200,
+      msg: `contact updated successfully... ${contact}`,
+    });
+  } catch (error) {
+    res.status(500).json({ statusCode: 500, msg: error.message });
+  }
 });
 
 // @route     DELETE api/contacts
