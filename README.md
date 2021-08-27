@@ -1,3 +1,8 @@
 # contact-keeper
 This app is used to store the contacts
-This app implements backend as well
+
+#technologies used:
+1) Node.js
+2) React.js
+3) Express.js
+4) Mongodb
