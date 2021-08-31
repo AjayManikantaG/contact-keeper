@@ -8,5 +8,5 @@ This app is used to store the contacts
 4) Mongodb
 
 #architecture
-=> The express app is connected to mongodb backend where it will update through the REST api.
-=> The react UI is used to make the REST apis to the backend.
+1) The express app is connected to mongodb backend where it will update through the REST api.
+2) The react UI is used to make the REST apis to the backend.
