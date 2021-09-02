@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import './About.css';
 
+let animateUp = '';
 const About = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    animateUp = 'animate-up';
+  }, []);
 
   return (
     <div className={animateUp}>

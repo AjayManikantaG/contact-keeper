@@ -440,3 +440,16 @@ table th {
     justify-content: center;
   }
 }
+
+.animate-up {
+  animation: animateUp 500ms ease;
+}
+
+@keyframes animateUp {
+  from {
+    transform: translateY(25%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
