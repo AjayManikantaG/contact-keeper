@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ContactForm = () => {
-  const { contact, setContact } = useState({
+  const [contact, setContact] = useState({
     name: '',
     email: '',
     phone: '',
