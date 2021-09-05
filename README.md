@@ -13,3 +13,4 @@ This app is used to store the contacts
 3) UI has sign up and sign in process for users to login
 4) Only signed up users are abled to access
 5) The access can be validated using JWT
+6) Mongodb is hosted on mongo cloud. 
