@@ -5,7 +5,7 @@ const ContactForm = () => {
     name: '',
     email: '',
     phone: '',
-    type: 'personal',
+    type: 'professional',
   });
 
   const { name, email, phone, type } = contact;
