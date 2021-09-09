@@ -14,3 +14,6 @@ This app is used to store the contacts
 4) Only signed up users are abled to access.
 5) The access can be validated using JWT.
 6) Mongodb is hosted on mongo cloud. 
+
+
+Please use npm start to start the app.
