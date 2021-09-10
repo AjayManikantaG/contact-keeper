@@ -16,4 +16,4 @@ This app is used to store the contacts
 6) Mongodb is hosted on mongo cloud. 
 
 
-Please use npm start to start the app.
+Please use npm start to start the app!
