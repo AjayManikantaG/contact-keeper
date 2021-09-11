@@ -23,7 +23,8 @@ body {
   color: #333;
 }
 
-ul li i {
+ul li i,
+input {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -312,6 +313,7 @@ input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
+input[type='phone'],
 select,
 textarea {
   display: block;
