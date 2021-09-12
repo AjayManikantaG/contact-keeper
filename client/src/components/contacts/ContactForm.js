@@ -3,6 +3,8 @@ import ContactContext from '../../context/contact/ContactContext';
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
+  const { current } = contactContext;
+  let addBtn = current === null ? 'Add Contact' : 'Edit Contact';
 
   const [contact, setContact] = useState({
     name: '',
@@ -72,7 +74,7 @@ const ContactForm = () => {
       <div>
         <input
           type='submit'
-          value='Add Contact'
+          value={addBtn}
           className='btn btn-primary btn-block'
         />
       </div>
