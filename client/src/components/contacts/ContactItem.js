@@ -9,7 +9,7 @@ export const ContactItem = ({ contact }) => {
   const { name, id, email, phone, type } = contact;
 
   function deleteContactItem() {
-    if (contact.id === current.id) {
+    if (current && contact.id === current.id) {
       clearCurrent();
     }
     deleteContact(id);
